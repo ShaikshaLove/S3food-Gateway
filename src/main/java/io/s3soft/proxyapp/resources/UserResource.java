@@ -44,7 +44,7 @@ public class UserResource {
 		Optional optional=res.getBody();
 		if(res.getStatusCodeValue()==201) {
 			String message=(String)optional.get();
-			return new ResponseEntity<Optional<String>>(Optional.of("To activate your accoutn, A conformation link has been sent to "+userDto.getEmail()+". It is valid for just 10 minutes"),HttpStatus.CREATED);
+			return new ResponseEntity<Optional<String>>(Optional.of("A conformation link has been sent to "+userDto.getEmail()+". It is valid for just 10 minutes"),HttpStatus.CREATED);
 		  }else if (res.getStatusCodeValue()==200){
 			LinkedHashMap<String,String> map=new LinkedHashMap<String,String>();
 
