@@ -46,15 +46,17 @@ angular.module("myapp").config(function($httpProvider,$routeProvider){
 angular.module("myapp").controller("BodyCtrl",function($scope,$http){
 
 	$scope.user={};
+	$scope.hideHyperLinks=true;
 	$http.get("/myaccount").then(function(response){
-		$scope.flag=true;
 		$scope.user=response.data;
 		console.log(response.data)
 	},function(error){
-		$scope.flag=true;
 		$scope.user=error.data;
+	});
+	
+	$scope.logout=function(){
+		$scope.hideHyperLinks=false;
 	}
-
-
-	)
+	
+	
 });
