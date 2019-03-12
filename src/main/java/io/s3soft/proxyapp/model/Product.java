@@ -1,18 +1,61 @@
 package io.s3soft.proxyapp.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+/**
+ * @author shaiksha
+ *
+ */
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="productId")
 public class Product {
-	
-	private String productId;
-	private String productName;
-	private String manufacturer;
-	private String description;
-	private double mrp;
-	private double currentCost;
-	private String imageName;
-	private Date uploadDate;
-	private Date lastModifiedDate;
+
+    private String productId;
+    private String productName;
+    private double price;
+    private double mrp;
+    private String description;
+    private long quantity;
+    private String manufacturer;
+    private byte[] image;
+    private String imageLocation;
+    private String imageName;
+    
+    public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public String getImageLocation() {
+		return imageLocation;
+	}
+	public void setImageLocation(String imageLocation) {
+		this.imageLocation = imageLocation;
+	}
+	public String getImageName() {
+		return imageName;
+	}
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+    private List<Category> categories=new ArrayList<>();
+    
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	private Date createdDate;
+    private Date lastModifiedDate;
+    
 	public String getProductId() {
 		return productId;
 	}
@@ -25,18 +68,11 @@ public class Product {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getManufacturer() {
-		return manufacturer;
+	public double getPrice() {
+		return price;
 	}
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public double getMrp() {
 		return mrp;
@@ -44,38 +80,46 @@ public class Product {
 	public void setMrp(double mrp) {
 		this.mrp = mrp;
 	}
-	public double getCurrentCost() {
-		return currentCost;
+	public String getDescription() {
+		return description;
 	}
-	public void setCurrentCost(double currentCost) {
-		this.currentCost = currentCost;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
-	public Date getUploadDate() {
-		return uploadDate;
+	public long getQuantity() {
+		return quantity;
 	}
-	public void setUploadDate(Date uploadDate) {
-		this.uploadDate = uploadDate;
+	public void setQuantity(long quantity) {
+		this.quantity = quantity;
+	}
+	public String getManufacturer() {
+		return manufacturer;
+	}
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", manufacturer=" + manufacturer
+				+ ", categories=" + categories + "]";
+	}
+	public Product() {
+		super();
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
 	public Date getLastModifiedDate() {
 		return lastModifiedDate;
 	}
 	public void setLastModifiedDate(Date lastModifiedDate) {
 		this.lastModifiedDate = lastModifiedDate;
-	}
-	public String getImageName() {
-		return imageName;
-	}
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
-	@Override
-	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", manufacturer=" + manufacturer
-				+ ", description=" + description + ", mrp=" + mrp + ", currentCost=" + currentCost + ", imageName="
-				+ imageName + ", uploadDate=" + uploadDate + ", lastModifiedDate=" + lastModifiedDate + "]";
-	}
-	
-	
-	
+	}	
 }

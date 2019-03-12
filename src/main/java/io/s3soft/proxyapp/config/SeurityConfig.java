@@ -2,6 +2,7 @@ package io.s3soft.proxyapp.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +25,9 @@ public class SeurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable().httpBasic().disable()
 		.authorizeRequests()
 		//	.antMatchers("/login.html","/login-error.html","/logout.html","/","/js/**","/css/**","/index.html","/api/users","/images/**").permitAll()
-		.antMatchers("/","/js/**","/images/**","/css/**","/index.html","/login.html","/login-error.html","/logout.html","/api/users").permitAll()
+		.antMatchers("/","/js/**","/images/**","/css/**","/index.html","/login.html","/login-error.html","/logout.html").permitAll()
+		.antMatchers(HttpMethod.GET,"/api/users").hasAnyRole("USER")
+		.antMatchers(HttpMethod.POST,"/api/users").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin().loginProcessingUrl("/login")

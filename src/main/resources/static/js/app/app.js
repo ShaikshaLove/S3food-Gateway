@@ -1,4 +1,4 @@
-angular.module("myapp",["ProductApp","user","ngRoute"]);
+angular.module("myapp",["ProductApp","user","NavBar","ngRoute"]);
 
 
 angular.module("myapp").config(function($httpProvider,$routeProvider){
@@ -17,6 +17,12 @@ angular.module("myapp").config(function($httpProvider,$routeProvider){
 		templateUrl:"js/app/product/html/products.html",
 		controller:"ProductListCtrl"
 			});
+	
+	$routeProvider.when("/MyCart",
+			{
+		templateUrl:"js/app/product/html/MyCart.html",
+		//controller:"ProductListCtrl"
+			});
 
 	$routeProvider.when("/user-login",
 			{
@@ -28,6 +34,12 @@ angular.module("myapp").config(function($httpProvider,$routeProvider){
 			{
 		templateUrl:"js/app/user/html/user-registration.html",
 		controller:"UserRegisterCtrl"
+			});
+	
+	$routeProvider.when("/user-data",
+			{
+		templateUrl:"js/app/user/html/user-data.html",
+		controller:"UserDataCtrl"
 			});
 
 	$routeProvider.when("/home",
@@ -42,21 +54,3 @@ angular.module("myapp").config(function($httpProvider,$routeProvider){
 			});
 });
 
-
-angular.module("myapp").controller("BodyCtrl",function($scope,$http){
-
-	$scope.user={};
-	$scope.hideHyperLinks=true;
-	$http.get("/myaccount").then(function(response){
-		$scope.user=response.data;
-		console.log(response.data)
-	},function(error){
-		$scope.user=error.data;
-	});
-	
-	$scope.logout=function(){
-		$scope.hideHyperLinks=false;
-	}
-	
-	
-});

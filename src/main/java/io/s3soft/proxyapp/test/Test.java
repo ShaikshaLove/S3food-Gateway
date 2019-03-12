@@ -13,7 +13,7 @@ public static void main(String[] args) {
     p.setProductName("apple");
     p.setDescription("My apple");
     p.setMrp(1.0);
-    p.setCurrentCost(1.0);
+   // p.setCurrentCost(1.0);
    System.out.println(	mapper.convertValue(p, LinkedMultiValueMap.class));
  }
 }

@@ -1,5 +1,7 @@
 package io.s3soft.proxyapp.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,8 +16,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public User getUserByEmail(String email) {
-		User user=restTemplate.getForObject("http://sa-registration-service-sandbox.mymicroapps.net/users/"+email.toLowerCase(),User.class);
+		User user=restTemplate.getForObject("https://s3food-users.herokuapp.com/users/"+email.toLowerCase(),User.class);
 		return user;
 	}
-
+	
+	@Override
+	public List<User> getAllUsers() {
+		List<User> user=restTemplate.getForObject("https://s3food-users.herokuapp.com/users/",List.class);
+		return user;
+	}
 }

@@ -132,14 +132,14 @@
 				<div class="col-md-4" ng-repeat="product in productList">
 					<div class="card mb-4 shadow-sm">
 						<img
-							src="{{product.imageName}}"
+							src="{{product.imageLocation}}"
 							width="100%" height="225" background="#55595c" color="#eceeef"
 							class="card-img-top" text="Thumbnail" />
 						<div class="card-body">
 							<h5>{{product.productName}}</h5>
 							<p class="card-text">{{product.description}}</p>
 							<p>
-								RS {{product.currentCost}}
+								RS {{product.price}}
 								<del>RS {{product.mrp}}</del>
 							</p>
 							<div class="d-flex justify-content-between align-items-center">
@@ -149,7 +149,7 @@
 									<button type="button" class="btn btn-md btn-outline-success">Buy
 										Now</button>
 								</div>
-								<small class="text-muted">{{product.manufacturer}}</small>
+								<small class="text-muted">{{product.quantity}} Available</small>
 							</div>
 						</div>
 					</div>

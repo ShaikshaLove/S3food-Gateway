@@ -17,5 +17,9 @@ angular.module("user").service("UserService",['$http',function($http){
 	this.register=function(user){
 		return $http.post("/api/users",user);
 	}
+	
+	this.getUsers=function(){
+		return $http.get("/api/users");
+	}
 
 }]);

@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.s3soft.proxyapp.error.ApiError;
 import io.s3soft.proxyapp.error.ApiValidationError;
+import io.s3soft.proxyapp.model.User;
 import io.s3soft.proxyapp.model.UserDto;
+import io.s3soft.proxyapp.service.IUserService;
 
 /**
  * @author shaiksha
@@ -29,6 +32,9 @@ import io.s3soft.proxyapp.model.UserDto;
 @RestController
 @RequestMapping("/api/users")
 public class UserResource {
+	
+	@Autowired
+	private IUserService userService;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -40,7 +46,7 @@ public class UserResource {
 		HttpHeaders headers=new HttpHeaders();
 		headers.add("Content-type", "application/json");
 		HttpEntity<UserDto> request=new HttpEntity<>(userDto,headers);
-		ResponseEntity<Optional> res=restTemplate.exchange("http://sa-registration-service-SANDBOX.mymicroapps.net/users",HttpMethod.POST,request,Optional.class);
+		ResponseEntity<Optional> res=restTemplate.exchange("https://s3food-users.herokuapp.com/users",HttpMethod.POST,request,Optional.class);
 		Optional optional=res.getBody();
 		if(res.getStatusCodeValue()==201) {
 			String message=(String)optional.get();
@@ -51,7 +57,6 @@ public class UserResource {
 			ObjectMapper m=new ObjectMapper();
 			ApiError m1 =m.convertValue(optional.get(), ApiError.class);
 
-
 			List<ApiValidationError> listErr=m1.getErrors();
 			for(ApiValidationError er:listErr) {
 				map.put(er.getProperty(), er.getMessage());
@@ -60,6 +65,12 @@ public class UserResource {
 		}else {
 			return  ResponseEntity.ok("No worries!!! It is just a server issue. Try again");
 		}
+	}
+	
+	@GetMapping
+	public List<User> getAllUsers()
+	{
+		return userService.getAllUsers();
 	}
 	
 }

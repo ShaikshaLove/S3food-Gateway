@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Spring-AngularJs</artifactId>
+	<artifactId>S3food-Gate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Spring-AngularJs</name>
 	<description>Demo project for Spring Boot</description>
